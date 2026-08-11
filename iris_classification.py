@@ -1,8 +1,6 @@
-# ===========================================
 # CodeAlpha Internship Task 1
 # Iris Flower Classification
 # Author: Muhammad Abdullah
-# ===========================================
 
 # Import Libraries
 import pandas as pd
@@ -19,9 +17,7 @@ from sklearn.metrics import (
     confusion_matrix
 )
 
-# ===========================================
-# STEP 1 - Load Dataset
-# ===========================================
+# Load Dataset
 
 print("=" * 60)
 print("Loading Dataset...")
@@ -29,9 +25,7 @@ print("=" * 60)
 
 df = pd.read_csv("Iris.csv")
 
-# ===========================================
-# STEP 2 - Display Dataset Information
-# ===========================================
+# Display Dataset Information
 
 print("\nFirst 5 Rows\n")
 print(df.head())
@@ -54,9 +48,7 @@ print(df.isnull().sum())
 print("\nFlower Species")
 print(df["Species"].unique())
 
-# ===========================================
-# STEP 3 - Data Cleaning
-# ===========================================
+# Data Cleaning
 
 print("\nRemoving Id Column...")
 
@@ -65,9 +57,7 @@ df.drop("Id", axis=1, inplace=True)
 print("\nUpdated Columns")
 print(df.columns)
 
-# ===========================================
-# STEP 4 - Data Visualization
-# ===========================================
+# Data Visualization
 
 print("\nCreating Visualizations...")
 
@@ -101,17 +91,13 @@ plt.title("Correlation Heatmap")
 plt.savefig("heatmap.png")
 plt.show()
 
-# ===========================================
-# STEP 5 - Prepare Data
-# ===========================================
+# Prepare Data
 
 X = df.drop("Species", axis=1)
 
 y = df["Species"]
 
-# ===========================================
-# STEP 6 - Train Test Split
-# ===========================================
+# Train Test Split
 
 X_train, X_test, y_train, y_test = train_test_split(
     X,
@@ -123,9 +109,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 print("\nTraining Samples :", len(X_train))
 print("Testing Samples :", len(X_test))
 
-# ===========================================
-# STEP 7 - Build Machine Learning Model
-# ===========================================
+# Build Machine Learning Model
 
 print("\nTraining Random Forest Model...")
 
@@ -136,15 +120,11 @@ model = RandomForestClassifier(
 
 model.fit(X_train, y_train)
 
-# ===========================================
-# STEP 8 - Prediction
-# ===========================================
+# Prediction
 
 y_pred = model.predict(X_test)
 
-# ===========================================
-# STEP 9 - Model Evaluation
-# ===========================================
+# Model Evaluation
 
 accuracy = accuracy_score(y_test, y_pred)
 
@@ -159,9 +139,7 @@ print("\nClassification Report\n")
 
 print(classification_report(y_test, y_pred))
 
-# ===========================================
-# STEP 10 - Confusion Matrix
-# ===========================================
+# Confusion Matrix
 
 cm = confusion_matrix(y_test, y_pred)
 
@@ -184,9 +162,7 @@ plt.savefig("confusion_matrix.png")
 
 plt.show()
 
-# ===========================================
-# STEP 11 - Feature Importance
-# ===========================================
+# Feature Importance
 
 importance = pd.DataFrame({
     "Feature": X.columns,
@@ -215,17 +191,13 @@ plt.savefig("feature_importance.png")
 
 plt.show()
 
-# ===========================================
-# STEP 12 - Save Model
-# ===========================================
+# Save Model
 
 joblib.dump(model, "model.pkl")
 
 print("\nModel saved successfully as model.pkl")
 
-# ===========================================
-# STEP 13 - Sample Prediction
-# ===========================================
+# Sample Prediction
 
 sample = pd.DataFrame({
     "SepalLengthCm": [5.1],
